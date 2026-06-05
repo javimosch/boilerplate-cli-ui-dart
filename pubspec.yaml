@@ -1,0 +1,14 @@
+name: boilerplate_cli_ui_dart
+description: Dart CLI with embedded web UI. Single binary via dcli pack.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  shelf: ^1.4.0
+  shelf_static: ^1.0.0
+
+dev_dependencies:
+  lints: ^3.0.0
