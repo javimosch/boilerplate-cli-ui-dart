@@ -1,113 +1,8 @@
 # boilerplate-cli-ui-dart
 
-Dart CLI with embedded web UI. Single binary via `dart compile exe`.
+Dart CLI with embedded web UI. Single binary, no runtime dependencies.
 
-## Features
-
-- **Single binary**: No runtime dependencies after compilation
-- **Embedded UI**: Vue 3 frontend served from CDN
-- **JSON API**: Agent-friendly endpoints at `/api/*`
-- **Agent-first**: Structured output, semantic errors
-- **Cross-platform**: Compiles to Linux, macOS, Windows, ARM
-
-## Quick Start
-
-### Development
-
-```bash
-# Install dependencies
-dart pub get
-
-# Run server
-dart run bin/main.dart start
-
-# Run with custom port
-dart run bin/main.dart start -p 3000
-```
-
-### Build
-
-```bash
-# Build native binary
-./build.sh
-
-# Run binary
-./boilerplate-cli-ui-dart start
-```
-
-## Usage
-
-```bash
-# Start HTTP server
-boilerplate-cli-ui-dart start
-
-# Start on custom port
-boilerplate-cli-ui-dart start -p 3000
-
-# Show version
-boilerplate-cli-ui-dart version
-
-# Show help
-boilerplate-cli-ui-dart help
-```
-
-## API Endpoints
-
-### GET /api/status
-
-Server status and information.
-
-```json
-{
-  "status": "running",
-  "port": 8080,
-  "uptime": "0s",
-  "version": "1.0.0"
-}
-```
-
-### GET /api/health
-
-Health check endpoint.
-
-```json
-{
-  "status": "healthy",
-  "version": "1.0.0"
-}
-```
-
-## Project Structure
-
-```
-boilerplate-cli-ui-dart/
-├── bin/
-│   └── main.dart          # CLI entry point and HTTP server
-├── web/                  # Frontend files (served at runtime)
-│   ├── index.html
-│   ├── css/
-│   └── js/
-├── pubspec.yaml
-├── build.sh
-└── README.md
-```
-
-## Tech Stack
-
-- **Language**: Dart 3.5+
-- **HTTP Server**: shelf
-- **Frontend**: Vue 3 (CDN)
-- **Styling**: Tailwind CSS (CDN)
-- **Icons**: Lucide (CDN)
-
-## Binary Size
-
-- **Linux x86_64**: ~6.4MB
-- **macOS x86_64**: ~6.4MB
-- **macOS ARM64**: ~6.4MB
-- **Windows x86_64**: ~6.4MB
-
-## Other Versions
+Part of [SuperCLI](https://github.com/javimosch/supercli) - build CLI/UI plugins fast for 2026.
 
 | Stack | Repo | Binary |
 |-------|------|--------|
@@ -122,7 +17,109 @@ boilerplate-cli-ui-dart/
 | C++ + Vue 3 | [boilerplate-cli-ui-cpp](https://github.com/javimosch/boilerplate-cli-ui-cpp) | ~493KB |
 | Nim + Vue 3 | [boilerplate-cli-ui-nim](https://github.com/javimosch/boilerplate-cli-ui-nim) | ~364KB |
 | Zig + Vue 3 | [boilerplate-cli-ui-zig](https://github.com/javimosch/boilerplate-cli-ui-zig) | ~190KB |
-| Dart + Vue 3 | [boilerplate-cli-ui-dart](https://github.com/javimosch/boilerplate-cli-ui-dart) | ~6.4MB |
+| **Dart + Vue 3** | **boilerplate-cli-ui-dart** | **~6.4MB** |
+
+## Architecture
+
+```
+boilerplate-cli-ui-dart/
+├── bin/
+│   └── main.dart          # CLI + HTTP server (shelf)
+├── web/                   # Frontend (served at runtime)
+│   ├── index.html
+│   ├── css/
+│   └── js/
+├── pubspec.yaml
+├── build.sh
+└── README.md
+```
+
+## Key Feature: Runtime File Serving
+
+Frontend files are **served from disk** at runtime:
+
+```dart
+final webDir = Directory('${scriptDir.path}/web');
+var staticHandler = createStaticHandler(webDir.path, defaultDocument: 'index.html');
+```
+
+**Benefits:**
+- Single binary output (no runtime dependencies)
+- Separate HTML/CSS/JS files (proper syntax highlighting)
+- No build step for frontend (CDN-based Vue + Tailwind + Lucide)
+- Fast development iteration (no recompile for UI changes)
+
+## Build
+
+```bash
+chmod +x build.sh
+./build.sh
+```
+
+Or manually:
+
+```bash
+dart compile exe bin/main.dart -o boilerplate-cli-ui-dart
+```
+
+Output: `boilerplate-cli-ui-dart` (~6.4MB)
+
+## Usage
+
+```bash
+# Start server (foreground)
+./boilerplate-cli-ui-dart start
+
+# Start on custom port
+./boilerplate-cli-ui-dart start -p 3000
+
+# Show version
+./boilerplate-cli-ui-dart version
+
+# Show help
+./boilerplate-cli-ui-dart help
+```
+
+## API Endpoints
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /` | Web UI |
+| `GET /api/status` | Server status (JSON) |
+| `GET /api/health` | Health check (JSON) |
+
+## Frontend Stack
+
+- **Vue 3** (CDN) - Reactive UI with hashbang routing
+- **Tailwind CSS** (CDN) - Utility-first styling
+- **Lucide Icons** (CDN) - Icon library
+
+## Comparison with Go Versions
+
+| Aspect | Go | Dart |
+|--------|-----|------|
+| Binary size | ~5MB | ~6.4MB |
+| Compile time | Fast | Fast |
+| Memory safety | GC | Type system |
+| Web framework | net/http | shelf |
+| File serving | go:embed | Runtime static handler |
+
+## Development
+
+### Edit Frontend
+
+1. Edit files in `web/`
+2. Run `dart run bin/main.dart start` (no recompile needed)
+3. Refresh browser
+
+### Add API Endpoint
+
+```dart
+if (path == 'api/my-endpoint') {
+  final data = {'result': 'success'};
+  return Response.ok(json.encode(data));
+}
+```
 
 ## License
 
