@@ -1,6 +1,7 @@
 # boilerplate-cli-ui-dart
 
 Dart CLI with embedded web UI. Single binary, no runtime dependencies.
+|| V + Vue 3 | [boilerplate-cli-ui-v](https://github.com/javimosch/boilerplate-cli-ui-v) | ~1.2MB |
 
 Part of [SuperCLI](https://github.com/javimosch/supercli) - build CLI/UI plugins fast for 2026.
 
@@ -18,6 +19,7 @@ Part of [SuperCLI](https://github.com/javimosch/supercli) - build CLI/UI plugins
 | Nim + Vue 3 | [boilerplate-cli-ui-nim](https://github.com/javimosch/boilerplate-cli-ui-nim) | ~364KB |
 | Zig + Vue 3 | [boilerplate-cli-ui-zig](https://github.com/javimosch/boilerplate-cli-ui-zig) | ~190KB |
 | **Dart + Vue 3** | **boilerplate-cli-ui-dart** | **~6.4MB** |
+|| V + Vue 3 | [boilerplate-cli-ui-v](https://github.com/javimosch/boilerplate-cli-ui-v) | ~1.2MB |
 
 ## Architecture
 
@@ -97,6 +99,7 @@ Output: `boilerplate-cli-ui-dart` (~6.4MB)
 ## Comparison with Go Versions
 
 | Aspect | Go | Dart |
+|| V + Vue 3 | [boilerplate-cli-ui-v](https://github.com/javimosch/boilerplate-cli-ui-v) | ~1.2MB |
 |--------|-----|------|
 | Binary size | ~5MB | ~6.4MB |
 | Compile time | Fast | Fast |
