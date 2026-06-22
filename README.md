@@ -1,8 +1,6 @@
 # boilerplate-cli-ui-dart
 
 Dart CLI with embedded web UI. Single binary, no runtime dependencies.
-|| V + Vue 3 | [boilerplate-cli-ui-v](https://github.com/javimosch/boilerplate-cli-ui-v) | ~1.2MB | ~5MB |
-|| Crystal + Vue 3 | [boilerplate-cli-ui-crystal](https://github.com/javimosch/boilerplate-cli-ui-crystal) | ~3.1MB | ~50MB |
 Part of [SuperCLI](https://github.com/javimosch/supercli) - build CLI/UI plugins fast for 2026.
 | Stack | Repo | Binary | SDK Size |
 |-------|------|--------|----------|
